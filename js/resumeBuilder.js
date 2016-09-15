@@ -32,7 +32,7 @@ var bio = {
         for (var i = 0; i < bio.skills.length; i++) {
             var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
             $("#skills").append(formattedSkill);
-        }
+        };
     }
 };
 
@@ -75,7 +75,7 @@ var work = {
             var formattedAll = formattedEmployer + formattedTitle + formattedLocation + formattedDates + formattedDescription;
 
             $(".work-entry:last").append(formattedAll);
-        })
+        });
     }
 };
 
@@ -84,14 +84,14 @@ var education = {
         "name": "George Mason University",
         "degree": "BA",
         "dates": "2005-2010",
-        "majors": "Global Conflict Resolution",
+        "majors": ["Global Conflict Resolution"],
         "location": "Fairfax, VA",
         "url": "http://www2.gmu.edu"
     }, {
         "name": "TEFL Worldwide Prague",
         "degree": "TEFL Certificate",
         "dates": "Feb 2014",
-        "majors": "Teaching English as a Foreign Language",
+        "majors": ["Teaching English as a Foreign Language"],
         "location": "Prague, Czech Republic",
         "url": "http://teflworldwideprague.com"
     }],
@@ -105,17 +105,19 @@ var education = {
     "display": function() {
         $("#education").append(HTMLschoolStart);
 
-        education.schools.forEach(function(i) {
-            var formattedschoolName = HTMLschoolName.replace("%data%", i.name).replace("#", i.url);
-            $(".education-entry:last").append(formattedschoolName);
-            var formattedschoolDegree = HTMLschoolDegree.replace("%data%", i.degree);
-            $(".education-entry:last").append(formattedschoolDegree);
-            var formattedschoolDates = HTMLschoolDates.replace("%data%", i.dates);
+        education.schools.forEach(function(edu) {
+            var formattedschoolName = HTMLschoolName.replace("%data%", edu.name).replace("#", edu.url);
+            var formattedschoolDegree = HTMLschoolDegree.replace("%data%", edu.degree);
+            $(".education-entry:last").append(formattedschoolName + formattedschoolDegree);
+            var formattedschoolDates = HTMLschoolDates.replace("%data%", edu.dates);
             $(".education-entry:last").append(formattedschoolDates);
-            var formattedschoolLocation = HTMLschoolLocation.replace("%data%", i.location);
+            var formattedschoolLocation = HTMLschoolLocation.replace("%data%", edu.location);
             $(".education-entry:last").append(formattedschoolLocation);
-            var formattedschoolMajor = HTMLschoolMajor.replace("%data%", i.majors);
-            $(".education-entry:last").append(formattedschoolMajor);
+
+            for (var i = 0; i < edu.majors.length; i++) {
+                var formattedschoolMajor = HTMLschoolMajor.replace("%data%", edu.majors[i]);
+                $(".education-entry:last").append(formattedschoolMajor);
+            };
         });
 
         $("#education:last").append(HTMLonlineClasses);
@@ -129,7 +131,7 @@ var education = {
             $(".education-entry:last").append(formattedonlineTitle + formattedonlineSchool);
             $(".education-entry:last").append(formattedonlineDates);
             $(".education-entry:last").append(formattedonlineUrl);
-        }
+        };
     }
 };
 
@@ -155,8 +157,8 @@ var projects = {
             for (var i = 0; i < proj.images.length; i++) {
                 var formattedImage = HTMLprojectImage.replace("%data%", proj.images[i]);
                 $(".project-entry:last").append(formattedImage);
-            }
-        })
+            };
+        });
     }
 };
 
@@ -226,7 +228,6 @@ $("#main").append(internationalizeButton);*/
 
 
 //Test forEach function for displaying Projects
-
 
 bio.display();
 work.display();
